@@ -13,9 +13,11 @@ import org.springframework.stereotype.Component;
 public class OfferConvert {
     private final ModelMapper mapper;
     public Offer Offer(OfferReq offerReq){
-       Offer offer= mapper.map(offerReq,Offer.class);
-//       Recruteur recruteur=Recruteur;
-//        offer.setRecruteur();
-        return new Offer();
+        Offer offer = mapper.map(offerReq, Offer.class);
+
+        Recruteur recruteur = Recruteur.builder().id(offerReq.getRecruteur()).build();
+        offer.setRecruteur(recruteur);
+
+        return offer;
     }
 }

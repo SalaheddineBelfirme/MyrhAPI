@@ -52,10 +52,13 @@ public class RecruteurServiceImpl implements CroudService<UUID, RecruteurReq, Re
 
     @Override
     public RecruteurRespo getOne(UUID uuid) {
-        if (repository.findById(uuid).isPresent()){
-            return  repository.findById(uuid).stream()
-                    .map(recruteur -> mapper.modelMapper().map(recruteur, RecruteurRespo.class)).findFirst().get();
-        }
-       throw new baseExsption("no recruteur with the id"+uuid);
+        return repository.findById(uuid)
+                .map(recruteur -> mapper.modelMapper().map(recruteur, RecruteurRespo.class))
+                .orElseThrow(() -> new baseExsption("Recruteur not found with UUID: " + uuid));
+    }
+
+    public Recruteur checkRecruteur(UUID uuid) {
+        return repository.findById(uuid)
+                .orElseThrow(() -> new baseExsption("Recruteur not found with UUID: " + uuid.toString()));
     }
 }

@@ -6,10 +6,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@RestControllerAdvice
 public class ValidtionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -23,7 +24,6 @@ public class ValidtionHandler {
         });
         return errors;
     }
-
     @ExceptionHandler(baseExsption.class)
     public ResponseEntity<Map<String, String>> handleFishNotFoundException(baseExsption ex) {
         return new ResponseEntity<>(Map.of("message", ex.getMessage()), HttpStatus.NOT_FOUND);

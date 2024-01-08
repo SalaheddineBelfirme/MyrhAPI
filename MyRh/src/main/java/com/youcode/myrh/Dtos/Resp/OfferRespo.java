@@ -13,11 +13,12 @@ import java.util.UUID;
 @Data
 @RequiredArgsConstructor
 public class OfferRespo {
+    private UUID id;
     private String description;
     private String profile;
     private String ville;
     private Niveau niveau;
     private Boolean status;
-    private UUID recruteur;
+    private Recruteur recruteur;
     private List<ChercheurOffer> chercheurs;
 }
